@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { usefarmerStore } from "../store/farmer";
+import { useNavigate } from "react-router-dom";
 
 const FarmerProfile = () => {
     const [searchParams] = useSearchParams();
     const username = searchParams.get('name') || 'Unknown Farmer';
-
+    const navigate = useNavigate(); // ✅ create navigate function
     const { products, loading, error, getProductsByFarmerUsername } = usefarmerStore();
 
     useEffect(() => {
@@ -45,9 +46,12 @@ const FarmerProfile = () => {
                     <h1 className="text-4xl md:text-5xl font-extrabold text-green-700">
                         {username}
                     </h1>
-                    <button className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors">
+                        <button
+                        onClick={() => navigate(`/chat?receiver=${username}&receiverType=Farmer`)}
+                        className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors"
+                        >
                         Message
-                    </button>
+                        </button>
                 </div>
 
                 {/* Products Grid */}

@@ -8,6 +8,8 @@ import FarmerDashboard from "../pages/FarmerDashboard"; // Farmer Dashboard
 import FarmerAccount from "../pages/farmeraccount.jsx";
 import Order from "../pages/order.jsx";
 import Farmerprofile from "../pages/farmerprofile.jsx";
+import Chat from "../pages/chat.jsx";
+import Conversations from "../pages/Conversations.jsx";
 const AuthenticatedRedirect = () => {
     const { user } = useAuthStore();
     if (!user) return <Login />; // Or a loading spinner
@@ -60,6 +62,8 @@ function App() {
                 {/* Optional: A catch-all route for any other path */}
                 <Route path="/order" element={isAuthenticated && user.accountType==='Consumer'? <Order></Order>:<Navigate to="/login"></Navigate>}></Route>
                 <Route path="/farmerprofile" element={isAuthenticated&& user.accountType==='Consumer' ? <Farmerprofile></Farmerprofile>:<Navigate to="/login"></Navigate>}></Route>
+                <Route path="/conversations" element={isAuthenticated ? <Conversations></Conversations>:<Navigate to="/login"></Navigate>}></Route>
+                <Route path="/chat" element={<Chat />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </div>

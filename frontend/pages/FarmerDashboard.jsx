@@ -64,30 +64,40 @@ const FarmerDashboard = () => {
     return (
         <div className="min-h-screen bg-gray-100 font-sans">
             {/* TOP HEADER */}
-            <header className="bg-white shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center py-4">
-                        <div className="flex items-center">
-                            <img src="/logo.png" alt="Farm Kart Logo" className="h-12 w-12 rounded-full mr-3" />
-                            <span className="text-2xl font-bold text-gray-800">FARM KART</span>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <Link
-                                to="/farmeraccount"
-                                className="px-5 py-2 bg-white text-green-600 border border-green-600 font-semibold rounded-lg shadow-sm hover:bg-green-50 transition-colors"
-                            >
-                                Account
-                            </Link>
-                        </div>
-                    </div>
+        <header className="bg-white shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center py-4">
+                {/* Logo */}
+                <div className="flex items-center">
+                    <img src="/logo.png" alt="Farm Kart Logo" className="h-12 w-12 rounded-full mr-3" />
+                    <span className="text-2xl font-bold text-gray-800">FARM KART</span>
                 </div>
+
+                {/* Buttons */}
+                <div className="flex items-center space-x-4">
+                    <Link
+                    to="/farmeraccount"
+                    className="px-5 py-2 bg-white text-green-600 border border-green-600 font-semibold rounded-lg shadow-sm hover:bg-green-50 transition-colors"
+                    >
+                    Account
+                    </Link>
+
+                    {/* ✅ New Messages Button */}
+                 <Link
+                    to="/conversations"
+                    className="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-sm hover:bg-green-700 transition-colors"
+                    >
+                    Messages
+                    </Link>
+                </div>
+                </div>
+            </div>
             </header>
 
             {/* HERO IMAGE SECTION */}
             <div className="w-full h-64 md:h-80 lg:h-96">
                 <img src="/main.png" alt="Fresh produce" className="w-full h-full object-cover" />
             </div>
-
 
             {/* MAIN CONTENT AREA */}
             <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">

@@ -1,12 +1,20 @@
 const express = require('express');
+const http = require('http');
 const cors = require('cors');
 require('dotenv').config();
-const app = express();
+const { setupSocket } = require('./config/socket');
 const PORT = process.env.PORT || 5000;
 const db = require('./config/database');
 const cookieParser = require('cookie-parser');
 const { cloudinaryConnect } = require('./config/cloudinary');
-const fileUpload = require('express-fileupload'); // 1. IMPORT file-upload
+const fileUpload = require('express-fileupload');
+
+// Create a single Express app and HTTP server instance
+const app = express();
+const server = http.createServer(app);
+
+// Attach Socket.IO to the single server instance
+const io = setupSocket(server);
 
 app.use(cors({
     origin: [process.env.CLIENT_URL, "http://localhost:5173"],
@@ -17,8 +25,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-// 2. USE THE FILE UPLOAD MIDDLEWARE
-// This must be configured to handle file uploads and make req.files and req.body available
+// Use the file upload middleware
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/'
@@ -32,6 +39,8 @@ db.connectDB();
 const router = require("./Router/auth");
 app.use('/', router);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = { io, app, server };
